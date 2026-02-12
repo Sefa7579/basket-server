@@ -8,15 +8,15 @@ module.exports = function(db) {
     android: {
       version: "1.0.0",
       versionCode: 1,
-      downloadUrl: "",
+      downloadUrl: "https://www.mediafire.com/file/pmh46u3km214wyu/BasketBot-v1.0.0-Final.apk/file",
       forceUpdate: false,
-      changelog: "İlk sürüm"
+      changelog: "İlk sürüm - Basketbol Oto Bahis Bot"
     },
     windows: {
       version: "1.0.0",
-      downloadUrl: "",
+      downloadUrl: "https://www.mediafire.com/file/x4vv6f8i42x9erf/Basketbol+Oto+Bahis+Setup+1.0.0.exe/file",
       forceUpdate: false,
-      changelog: "İlk sürüm"
+      changelog: "İlk sürüm - Basketbol Oto Bahis Bot"
     }
   }
 
