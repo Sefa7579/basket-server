@@ -33,12 +33,14 @@ async function startServer() {
     const licenseRoutes = require('./routes/license')(db)
     const versionRoutes = require('./routes/version')(db)
     const statsRoutes = require('./routes/stats')(db)
+    const updateRoutes = require('./routes/update')(db)
 
     app.use('/api/auth', authRoutes)
     app.use('/api/admin', adminRoutes)
     app.use('/api/license', licenseRoutes)
     app.use('/api/version', versionRoutes)
     app.use('/api/stats', statsRoutes)
+    app.use('/api/update', updateRoutes)
 
     // Health check
     app.get('/health', (req, res) => res.json({ ok: true }))
