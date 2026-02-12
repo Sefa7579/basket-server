@@ -26,15 +26,7 @@ module.exports = function(db) {
         return res.status(400).json({ success: false, error: 'Bu kullanıcı adı zaten kullanılıyor.' })
       }
 
-      if (ipAddress) {
-        const sameIP = db.prepare('SELECT id FROM users WHERE registered_ip = ?').get(ipAddress)
-        if (sameIP) {
-          return res.status(400).json({
-            success: false,
-            error: 'Bu IP adresinden daha önce kayıt yapılmış. Her IP adresi sadece bir kere kayıt olabilir.'
-          })
-        }
-      }
+      // IP kısıtlaması kaldırıldı - aynı IP'den birden fazla kayıt yapılabilir
 
       const id = generateId()
       const passwordHash = bcrypt.hashSync(password, 10)
@@ -88,19 +80,7 @@ module.exports = function(db) {
         return res.status(401).json({ success: false, error: 'Kullanıcı adı veya şifre hatalı.' })
       }
 
-      if (deviceId && user.device_id && user.device_id !== deviceId) {
-        return res.status(403).json({
-          success: false,
-          error: 'Farklı cihaz tespit edildi! Her kullanıcı sadece bir cihazda çalışabilir.'
-        })
-      }
-
-      if (ipAddress && user.registered_ip && user.registered_ip !== ipAddress) {
-        return res.status(403).json({
-          success: false,
-          error: 'Farklı IP adresi tespit edildi! Her kullanıcı sadece kayıtlı IP adresinden giriş yapabilir.'
-        })
-      }
+      // Cihaz ve IP kısıtlamaları kaldırıldı - kullanıcılar farklı cihaz/IP'den giriş yapabilir
 
       const token = jwt.sign({ userId: user.id, type: 'user' }, JWT_SECRET, { expiresIn: JWT_EXPIRY })
       const out = {
